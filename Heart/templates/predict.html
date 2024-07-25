@@ -66,6 +66,22 @@ h1 {text-align: center;}
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    // Function to get CSRF token from cookies
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
     $(document).on('submit', '#post-form', function(e){
         e.preventDefault();
         $.ajax({
@@ -77,7 +93,7 @@ h1 {text-align: center;}
                 Patient_Gender: $('#Patient_Gender').val(),
                 Patient_Blood_Pressure: $('#Patient_Blood_Pressure').val(),
                 Patient_Heartrate: $('#Patient_Heartrate').val(),
-                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                csrfmiddlewaretoken: getCookie('csrftoken'),
                 action: 'post'
             },
             success: function(json) {

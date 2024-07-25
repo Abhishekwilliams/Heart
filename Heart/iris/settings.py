@@ -132,3 +132,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Crispy Forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Add your Railway deployment URL to this list
+CSRF_TRUSTED_ORIGINS = [
+    'https://heart-predictor.up.railway.app',
+]
