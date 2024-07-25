@@ -27,17 +27,16 @@
         </div>
     </div>
 </div>
+
 <style>
 h1 {text-align: center;}
-
 </style>
+
 <div class="container pt-5">
-  <h1>Heart Disease Prediction System</h1>
+    <h1>Heart Disease Prediction System</h1>
     <div class="row justify-content-md-center">
-
         <div class="col-md-4">
-
-            <form action="" id="post-form">
+            <form id="post-form">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="Patient_ID">Enter Patient ID</label>
@@ -48,7 +47,7 @@ h1 {text-align: center;}
                     <input type="number" step="1" class="form-control" id="Patient_Age" placeholder="" required>
                 </div>
                 <div class="form-group">
-                    <label for="Patient_Gender">Enter Patient Gender  (0 for Female & 1 for Male)</label>
+                    <label for="Patient_Gender">Enter Patient Gender (0 for Female & 1 for Male)</label>
                     <input type="number" step="1" class="form-control" id="Patient_Gender" placeholder="" required>
                 </div>
                 <div class="form-group">
@@ -65,35 +64,36 @@ h1 {text-align: center;}
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).on('submit', '#post-form',function(e){
+    $(document).on('submit', '#post-form', function(e){
         e.preventDefault();
         $.ajax({
-            type:'POST',
-            url:'{% url "predict:submit_prediction" %}',
-            data:{
-                Patient_ID:$('#Patient_ID').val(),
-                Patient_Age:$('#Patient_Age').val(),
-                Patient_Gender:$('#Patient_Gender').val(),
-                Patient_Blood_Pressure:$('#Patient_Blood_Pressure').val(),
-                Patient_Heartrate:$('#Patient_Heartrate').val(),
-                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+            type: 'POST',
+            url: '{% url "predict:submit_prediction" %}',
+            data: {
+                Patient_ID: $('#Patient_ID').val(),
+                Patient_Age: $('#Patient_Age').val(),
+                Patient_Gender: $('#Patient_Gender').val(),
+                Patient_Blood_Pressure: $('#Patient_Blood_Pressure').val(),
+                Patient_Heartrate: $('#Patient_Heartrate').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
                 action: 'post'
             },
-            success:function(json) {
+            success: function(json) {
                 document.forms["post-form"].reset();
-                document.getElementById("prediction").innerHTML = json['result']
-                document.getElementById("sl").innerHTML = json['Patient_ID']
-                document.getElementById("sw").innerHTML = json['Patient_Age']
-                document.getElementById("pl").innerHTML = json['Patient_Gender']
-                document.getElementById("pw").innerHTML = json['Patient_Blood_Pressure']
-                document.getElementById("pn").innerHTML = json['Patient_Heartrate']
+                document.getElementById("prediction").innerHTML = json['result'];
+                document.getElementById("sl").innerHTML = json['Patient_ID'];
+                document.getElementById("sw").innerHTML = json['Patient_Age'];
+                document.getElementById("pl").innerHTML = json['Patient_Gender'];
+                document.getElementById("pw").innerHTML = json['Patient_Blood_Pressure'];
+                document.getElementById("pn").innerHTML = json['Patient_Heartrate'];
             },
-            error : function(xhr,errmsg,err) {
-
+            error: function(xhr, errmsg, err) {
+                alert('An error occurred: ' + errmsg);
             }
         });
-    })
+    });
 </script>
 
 {% endblock %}

@@ -25,8 +25,8 @@ SECRET_KEY = '*e-vifgtz8^38rhj*x%&-k_&vs+v*24g1r_+#6atve@scpwylo'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1','heart-disease-predictor-live.herokuapp.com']
-
+# ALLOWED_HOSTS = ['127.0.0.1','heart-disease-predictor-live.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'crispy_bootstrap4',
     'predict',
 ]
 
@@ -123,3 +124,9 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATIC_URL = '/static/'
+# Directories where Django will look for additional static files
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+# Crispy Forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
