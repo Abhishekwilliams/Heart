@@ -1,1 +1,2 @@
-web: gunicorn iris.wsgi --log-file -
+
+web: gunicorn iris.wsgi --bind 0.0.0.0:$PORT
