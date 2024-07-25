@@ -1,0 +1,22 @@
+{
+    "build": "pip install -r requirements.txt && python manage.py collectstatic --noinput",
+    "start": "gunicorn iris.wsgi",
+    "env": {
+      "DJANGO_SECRET_KEY": {
+        "description": "Your Django secret key",
+        "required": true
+      },
+      "DJANGO_DEBUG": {
+        "description": "Debug mode for Django",
+        "default": "false"
+      },
+      "DJANGO_ALLOWED_HOSTS": {
+        "description": "Allowed hosts for Django",
+        "default": "*"
+      },
+      "DATABASE_URL": {
+        "description": "Database URL for Django",
+        "required": true
+      }
+    }
+  }
